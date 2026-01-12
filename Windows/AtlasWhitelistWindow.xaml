@@ -9,7 +9,7 @@
         Title="{x:Static p:Resources.atlas_whitelist_title}" 
 		Height="600" Width="550" 
 		MinWidth="500" MinHeight="300"
-		Background="#232323" 
+		Background="#4040ff" 
 		FontSize="16" 
 		WindowStartupLocation="CenterOwner" 
 		ResizeMode="CanResizeWithGrip" 
@@ -19,17 +19,17 @@
     
     <Window.Resources>
         <Style TargetType="Label">
-            <Setter Property="Foreground" Value="#ffaac9"/>
+            <Setter Property="Foreground" Value="#9d9dff"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#ffaac9"/>
+            <Setter Property="Foreground" Value="#9d9dff"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="Background" Value="#272727"/>
-            <Setter Property="Foreground" Value="#ffaac9"/>
-            <Setter Property="BorderBrush" Value="#c32b61"/>
+            <Setter Property="Foreground" Value="#9d9dff"/>
+            <Setter Property="BorderBrush" Value="#4040ff"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Margin" Value="2"/>
             <Setter Property="Template">
@@ -47,10 +47,10 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="#2d2d2d"/>
                                 <Setter Property="Foreground" Value="#ffffff"/>
-                                <Setter Property="BorderBrush" Value="#ea6192"/>
+                                <Setter Property="BorderBrush" Value="#8888ff"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#c32b61"/>
+                                <Setter Property="Background" Value="#4040ff"/>
                                 <Setter Property="Foreground" Value="#ffffff"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
@@ -65,10 +65,10 @@
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#1a1a1a"/>
-            <Setter Property="Foreground" Value="#ffaac9"/>
-            <Setter Property="BorderBrush" Value="#c32b61"/>
+            <Setter Property="Foreground" Value="#9d9dff"/>
+            <Setter Property="BorderBrush" Value="#4040ff"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CaretBrush" Value="#ea6192"/>
+            <Setter Property="CaretBrush" Value="#8888ff"/>
             <Setter Property="Margin" Value="2"/>
         </Style>
         <Style TargetType="StackPanel">
@@ -76,7 +76,7 @@
         </Style>
     </Window.Resources>
     
-	<Grid Background="#232323">
+	<Grid Background="#4040ff">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="132"/>
 			<RowDefinition Height="1*"/>
@@ -91,26 +91,26 @@
 			<Label Content="{x:Static p:Resources.Atlas_Whitelist}" 
                    FontSize="20" 
                    Margin="10,10,10,4" 
-                   Foreground="#ea6192"
+                   Foreground="#8888ff"
                    FontWeight="Bold"/>
 			<TextBlock Text="{x:Static p:Resources.Set_your_match_visibility_to_something_other_than_Public__then_add_teams_and_players_here_to_give_them_access_}" 
                       TextWrapping="Wrap" 
                       Margin="10,10,10,10" 
                       Background="#272727" 
                       Padding="10,10,10,10"
-                      Foreground="#ffaac9"/>
+                      Foreground="#9d9dff"/>
 		</StackPanel>
 		
         <!-- Teams Section -->
 		<Border Grid.Row="1" Grid.Column="0" 
                 Margin="10,10,5,10" 
                 Background="#272727" 
-                BorderBrush="#c32b61" 
+                BorderBrush="#4040ff" 
                 BorderThickness="1"
                 CornerRadius="3">
             <StackPanel Margin="5">
                 <Label Content="{x:Static p:Resources.Add_Team}" 
-                       Foreground="#ffaac9" 
+                       Foreground="#9d9dff" 
                        FontWeight="SemiBold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -120,17 +120,17 @@
                     <TextBox x:Name="teamNameInput" 
                              KeyDown="AddTeamKeyPress"
                              Background="#1a1a1a"
-                             Foreground="#ffaac9"
-                             BorderBrush="#c32b61"/>
+                             Foreground="#9d9dff"
+                             BorderBrush="#4040ff"/>
                     <Button Content="{x:Static p:Resources.Add}" 
                             Grid.Column="1" 
                             Click="AddTeamClicked"
                             Background="#272727"
-                            Foreground="#ffaac9"
-                            BorderBrush="#c32b61"/>
+                            Foreground="#9d9dff"
+                            BorderBrush="#4040ff"/>
                 </Grid>
                 <Border Margin="0,10,0,0" 
-                        BorderBrush="#c32b61" 
+                        BorderBrush="#4040ff" 
                         BorderThickness="0,1,0,0" 
                         Padding="0,5,0,0">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -146,12 +146,12 @@
 		<Border Grid.Row="1" Grid.Column="1" 
                 Margin="5,10,10,10" 
                 Background="#272727" 
-                BorderBrush="#c32b61" 
+                BorderBrush="#4040ff" 
                 BorderThickness="1"
                 CornerRadius="3">
             <StackPanel Margin="5">
                 <Label Content="{x:Static p:Resources.Add_Player}"
-                       Foreground="#ffaac9" 
+                       Foreground="#9d9dff" 
                        FontWeight="SemiBold"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -161,17 +161,17 @@
                     <TextBox x:Name="playerNameInput" 
                              KeyDown="AddPlayerKeyPress"
                              Background="#1a1a1a"
-                             Foreground="#ffaac9"
-                             BorderBrush="#c32b61"/>
+                             Foreground="#9d9dff"
+                             BorderBrush="#4040ff"/>
                     <Button Content="{x:Static p:Resources.Add}" 
                             Grid.Column="1" 
                             Click="AddPlayerClicked"
                             Background="#272727"
-                            Foreground="#ffaac9"
-                            BorderBrush="#c32b61"/>
+                            Foreground="#9d9dff"
+                            BorderBrush="#4040ff"/>
                 </Grid>
                 <Border Margin="0,10,0,0" 
-                        BorderBrush="#c32b61" 
+                        BorderBrush="#4040ff" 
                         BorderThickness="0,1,0,0" 
                         Padding="0,5,0,0">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" 
@@ -193,7 +193,7 @@
                 Grid.Row="2" 
                 Grid.Column="1"
                 Background="#272727"
-                Foreground="#ffaac9"
-                BorderBrush="#c32b61"/>
+                Foreground="#9d9dff"
+                BorderBrush="#4040ff"/>
 	</Grid>
 </Window>

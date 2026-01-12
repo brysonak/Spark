@@ -6,17 +6,17 @@
              mc:Ignorable="d"
              d:DesignHeight="900"
              d:DesignWidth="1400"
-             Background="#c32b61"
+             Background="#4040ff"
              FontSize="16"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
     
     <UserControl.Resources>
         <Style x:Key="CardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#c32b61"/>
+            <Setter Property="Background" Value="#4040ff"/>
             <Setter Property="Margin" Value="10,6"/>
             <Setter Property="Padding" Value="15,12"/>
             <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="BorderBrush" Value="#ea6192"/>
+            <Setter Property="BorderBrush" Value="#8888ff"/>
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         
@@ -34,7 +34,7 @@
         </Style>
         
         <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#232323"/>
+            <Setter Property="Background" Value="#8888ff"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="11"/>
@@ -43,7 +43,7 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#ffaac9"/>
+                    <Setter Property="Background" Value="#9d9dff"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -53,13 +53,13 @@
             <Setter Property="Padding" Value="10,8"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#ffaac9"/>
+                    <Setter Property="Background" Value="#9d9dff"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         
         <Style x:Key="StatCardStyle" TargetType="Border">
-            <Setter Property="Background" Value="#232323"/>
+            <Setter Property="Background" Value="#8888ff"/>
             <Setter Property="CornerRadius" Value="6"/>
             <Setter Property="Padding" Value="15,10"/>
             <Setter Property="Margin" Value="5,5"/>
@@ -73,10 +73,10 @@
         </Grid.ColumnDefinitions>
         
         <Border Grid.Column="0" 
-                Background="#c32b61" 
+                Background="#4040ff" 
                 CornerRadius="8" 
                 Margin="20,20,10,20"
-                BorderBrush="#ea6192"
+                BorderBrush="#8888ff"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -87,7 +87,7 @@
                 
                 <!-- Leaderboard Header -->
                 <Border Grid.Row="0" 
-                        Background="#ea6192" 
+                        Background="#8888ff" 
                         CornerRadius="8,8,0,0"
                         Padding="15">
                     <Grid>
@@ -152,7 +152,7 @@
                 
                 <!-- Search Box -->
                 <Border Grid.Row="2" 
-                        Background="#ea6192" 
+                        Background="#8888ff" 
                         CornerRadius="0,0,8,8"
                         Padding="15,10">
                     <Grid>
@@ -163,9 +163,9 @@
                         
                         <TextBox x:Name="LeaderboardSearchBox" 
                                  Grid.Column="0"
-                                 Background="#c32b61"
+                                 Background="#4040ff"
                                  Foreground="#ffffff"
-                                 BorderBrush="#ea6192"
+                                 BorderBrush="#8888ff"
                                  BorderThickness="1"
                                  Padding="10,8"
                                  FontSize="11"
@@ -192,9 +192,9 @@
                                 Content="🔍"
                                 Margin="10,0,0,0"
                                 Width="40"
-                                Background="#c32b61"
+                                Background="#4040ff"
                                 Foreground="#ffffff"
-                                BorderBrush="#ea6192"
+                                BorderBrush="#8888ff"
                                 BorderThickness="1"
                                 Cursor="Hand"
                                 Click="RefreshLeaderboard_Click"/>
@@ -205,10 +205,10 @@
         
         <!-- Right Panel: Player Statistics -->
         <Border Grid.Column="1" 
-                Background="#c32b61" 
+                Background="#4040ff" 
                 CornerRadius="8" 
                 Margin="10,20,20,20"
-                BorderBrush="#ea6192"
+                BorderBrush="#8888ff"
                 BorderThickness="1">
             <Grid>
                 <Grid.RowDefinitions>
@@ -219,7 +219,7 @@
                 
                 <!-- Player Search Header -->
                 <Border Grid.Row="0" 
-                        Background="#ea6192" 
+                        Background="#8888ff" 
                         CornerRadius="8,8,0,0"
                         Padding="15">
                     <Grid>
@@ -230,7 +230,7 @@
                                    VerticalAlignment="Center"/>
                         
                         <TextBlock x:Name="PlayerStatusText" 
-                                   Text="Enter Discord ID to search"
+                                   Text="Enter Discord ID or Username to search"
                                    FontSize="9"
                                    Foreground="#cccccc"
                                    VerticalAlignment="Center"
@@ -240,7 +240,7 @@
                 
                 <!-- Search Input -->
                 <Border Grid.Row="1" 
-                        Background="#c32b61"
+                        Background="#4040ff"
                         Padding="15,15">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -250,13 +250,12 @@
                         <StackPanel Grid.Column="0" Orientation="Horizontal">
                             <TextBox x:Name="DiscordIdInput" 
                                      Width="300"
-                                     Background="#ea6192"
+                                     Background="#8888ff"
                                      Foreground="#ffffff"
-                                     BorderBrush="#ea6192"
+                                     BorderBrush="#8888ff"
                                      BorderThickness="1"
                                      Padding="10,8"
                                      FontSize="11"
-                                     Text="Enter Discord ID"
                                      GotFocus="DiscordIdInput_GotFocus"
                                      LostFocus="DiscordIdInput_LostFocus">
                                 <TextBox.Style>
@@ -303,7 +302,7 @@
                         
                         <!-- Player Header -->
                         <Border Grid.Row="0" 
-                                Background="#ea6192"
+                                Background="#8888ff"
                                 Padding="20,15"
                                 Margin="15,15,15,10">
                             <Grid>
@@ -317,7 +316,7 @@
                                 <Border Grid.Column="0" 
                                         Width="60" 
                                         Height="60"
-                                        Background="#ea6192"
+                                        Background="#8888ff"
                                         CornerRadius="30"
                                         Margin="0,0,15,0">
                                     <TextBlock Text="👤"
@@ -343,10 +342,10 @@
                                 
                                 <!-- Stats Summary -->
                                 <Border Grid.Column="2" 
-                                        Background="#c32b61"
+                                        Background="#4040ff"
                                         CornerRadius="6"
                                         Padding="15,10"
-                                        BorderBrush="#ea6192"
+                                        BorderBrush="#8888ff"
                                         BorderThickness="1">
                                     <StackPanel>
                                         <TextBlock Text="Total Wins"
@@ -421,7 +420,7 @@
                         
                         <!-- All Statistics Grid -->
                         <Border Grid.Row="2" 
-                                Background="#ea6192"
+                                Background="#8888ff"
                                 CornerRadius="8"
                                 Padding="20"
                                 Margin="15,0,15,15">

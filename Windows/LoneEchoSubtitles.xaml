@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         FontSize="14" 
-        Background="#c32b61"
+        Background="#4040ff"
         ResizeMode="CanResize" 
         Title="Lone Echo Subtitles" 
         Height="400" 
@@ -21,23 +21,23 @@
         <Style TargetType="CheckBox">
             <Setter Property="Foreground" Value="#ffffff"/>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="#ffaac9"/>
+            <Setter Property="BorderBrush" Value="#9d9dff"/>
         </Style>
         <Style TargetType="ComboBox">
-            <Setter Property="Background" Value="#ea6192"/> <!-- Mid pink -->
+            <Setter Property="Background" Value="#8888ff"/> <!-- Mid pink -->
             <Setter Property="Foreground" Value="#ffffff"/>
-            <Setter Property="BorderBrush" Value="#ffaac9"/> <!-- Light pink -->
+            <Setter Property="BorderBrush" Value="#9d9dff"/> <!-- Light pink -->
             <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style TargetType="ComboBoxItem">
-            <Setter Property="Background" Value="#ea6192"/> <!-- Mid pink -->
+            <Setter Property="Background" Value="#8888ff"/> <!-- Mid pink -->
             <Setter Property="Foreground" Value="#ffffff"/>
-            <Setter Property="BorderBrush" Value="#ffaac9"/> <!-- Light pink -->
+            <Setter Property="BorderBrush" Value="#9d9dff"/> <!-- Light pink -->
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#ea6192"/> <!-- Mid pink -->
+            <Setter Property="Background" Value="#8888ff"/> <!-- Mid pink -->
             <Setter Property="Foreground" Value="#ffffff"/>
-            <Setter Property="BorderBrush" Value="#ffaac9"/> <!-- Light pink -->
+            <Setter Property="BorderBrush" Value="#9d9dff"/> <!-- Light pink -->
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -52,14 +52,14 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#ffaac9"/> <!-- Light pink -->
+                                <Setter Property="Background" Value="#9d9dff"/> <!-- Light pink -->
                                 <Setter Property="Foreground" Value="#000000"/>
                                 <Setter Property="BorderBrush" Value="#ffffff"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#c32b61"/> <!-- Dark pink -->
+                                <Setter Property="Background" Value="#4040ff"/> <!-- Dark pink -->
                                 <Setter Property="Foreground" Value="#ffffff"/>
-                                <Setter Property="BorderBrush" Value="#ea6192"/> <!-- Mid pink -->
+                                <Setter Property="BorderBrush" Value="#8888ff"/> <!-- Mid pink -->
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Background" Value="#d98eb0"/> <!-- Light muted pink -->
@@ -73,7 +73,7 @@
         </Style>
     </Window.Resources>
     
-	<Grid x:Name="grid" Background="#c32b61"> <!-- Dark pink -->
+	<Grid x:Name="grid" Background="#4040ff"> <!-- Dark pink -->
 		<TextBlock x:Name="subtitlesText" 
                    Text="{Binding SubtitleText}" 
                    Foreground="#ffffff"
@@ -99,7 +99,7 @@
                   HorizontalAlignment="Right" 
                   Margin="8,8,100,14"
                   Foreground="#ffffff"
-                  BorderBrush="#ffaac9"/>
+                  BorderBrush="#9d9dff"/>
 		
         <ComboBox x:Name="gameVersionDropdown" 
                   SelectedIndex="{Binding LoneEchoVersionDropdown}" 
@@ -107,17 +107,17 @@
                   HorizontalAlignment="Right" 
                   Margin="8,8,100,14" 
                   Visibility="Collapsed"
-                  Background="#ea6192"
+                  Background="#8888ff"
                   Foreground="#ffffff"
-                  BorderBrush="#ffaac9">
+                  BorderBrush="#9d9dff">
 			<ComboBoxItem Content="Lone Echo 1"
-                         Background="#ea6192"
+                         Background="#8888ff"
                          Foreground="#ffffff"
-                         BorderBrush="#ffaac9"></ComboBoxItem>
+                         BorderBrush="#9d9dff"></ComboBoxItem>
 			<ComboBoxItem Content="Lone Echo 2"
-                         Background="#ea6192"
+                         Background="#8888ff"
                          Foreground="#ffffff"
-                         BorderBrush="#ffaac9"></ComboBoxItem>
+                         BorderBrush="#9d9dff"></ComboBoxItem>
 		</ComboBox>
 		
         <Button x:Name="closeButton" 
@@ -130,8 +130,8 @@
                 Width="81" 
                 Click="CloseClick" 
                 VerticalAlignment="Bottom"
-                Background="#ea6192"
+                Background="#8888ff"
                 Foreground="#ffffff"
-                BorderBrush="#ffaac9"/>
+                BorderBrush="#9d9dff"/>
 	</Grid>
 </Window>

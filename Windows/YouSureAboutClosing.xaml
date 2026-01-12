@@ -11,7 +11,7 @@
 		Width="350" 
 		WindowStartupLocation="CenterOwner" 
 		ResizeMode="NoResize" 
-		Background="#FFc32b61" 
+		Background="#FF4040ff" 
 		FontSize="16"
         Icon="/img/ignite_logo.ico"
         >

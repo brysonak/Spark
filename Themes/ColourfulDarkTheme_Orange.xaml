@@ -4,26 +4,26 @@
 
     <!-- Colourful theme  Colours -->
 
-    <SolidColorBrush x:Key="ControlPrimaryDarkerBackground" Color="#FFc32b61" />
-    <SolidColorBrush x:Key="ControlPrimaryDarkerBorderBrush" Color="#FFc32b61" />
-    <SolidColorBrush x:Key="ControlPrimaryDefaultBackground" Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlPrimaryDefaultBorderBrush" Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlPrimaryBrightDefaultBackground" Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlPrimaryBrightDefaultBorderBrush" Color="#FFffaac9" />
+    <SolidColorBrush x:Key="ControlPrimaryDarkerBackground" Color="#FF4040ff" />
+    <SolidColorBrush x:Key="ControlPrimaryDarkerBorderBrush" Color="#FF4040ff" />
+    <SolidColorBrush x:Key="ControlPrimaryDefaultBackground" Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlPrimaryDefaultBorderBrush" Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlPrimaryBrightDefaultBackground" Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlPrimaryBrightDefaultBorderBrush" Color="#FF9d9dff" />
     <SolidColorBrush x:Key="ControlPrimaryDisabledBackground" Color="#FFb85a7d" />
     <SolidColorBrush x:Key="ControlPrimaryDisabledBorderBrush" Color="#FFb85a7d" />
-    <SolidColorBrush x:Key="ControlPrimaryMouseOverBackground" Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlPrimaryMouseOverBorderBrush" Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlPrimarySelectedBackground" Color="#FFc32b61" />
-    <SolidColorBrush x:Key="ControlPrimarySelectedBorderBrush" Color="#FFc32b61" />
-    <SolidColorBrush x:Key="ControlPrimarySelectedMouseOverBackground" Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlPrimarySelectedMouseOverBorderBrush" Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlPrimaryCaretSelectionBackground" Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlPrimaryCaretBackground" Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlPrimaryGlythColour" Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlPrimaryMouseOverGlythColour" Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlPrimarySelectedGlythColour" Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlPrimarySelectedMouseOverGlythColour" Color="#FFffaac9" />
+    <SolidColorBrush x:Key="ControlPrimaryMouseOverBackground" Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlPrimaryMouseOverBorderBrush" Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlPrimarySelectedBackground" Color="#FF4040ff" />
+    <SolidColorBrush x:Key="ControlPrimarySelectedBorderBrush" Color="#FF4040ff" />
+    <SolidColorBrush x:Key="ControlPrimarySelectedMouseOverBackground" Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlPrimarySelectedMouseOverBorderBrush" Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlPrimaryCaretSelectionBackground" Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlPrimaryCaretBackground" Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlPrimaryGlythColour" Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlPrimaryMouseOverGlythColour" Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlPrimarySelectedGlythColour" Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlPrimarySelectedMouseOverGlythColour" Color="#FF9d9dff" />
     <SolidColorBrush x:Key="ControlPrimaryDisabledGlythColour" Color="#FFb85a7d" />
 
     <ResourceDictionary.MergedDictionaries>

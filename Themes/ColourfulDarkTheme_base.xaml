@@ -4,9 +4,9 @@
                     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     
     <!-- Window Colours. Background, Border and TitleBar colours. -->
-    <SolidColorBrush x:Key="BackgroundColour"  Color="#FFc32b61" />
-    <SolidColorBrush x:Key="WindowBorderColour"  Color="#FF343434" />
-    <SolidColorBrush x:Key="WindowTitleColour"  Color="#FF242424" />
+    <SolidColorBrush x:Key="BackgroundColour"  Color="#FF4040ff" />
+    <SolidColorBrush x:Key="WindowBorderColour"  Color="#ff4040ff" />
+    <SolidColorBrush x:Key="WindowTitleColour"  Color="#ff5b5bff" />
     <!-- Control colour themes. dont mess with em okay unless youre good at styles -->
     <!-- Complete DarkTheme Colours -->
     <SolidColorBrush x:Key="TransparentBrush"                    Color="Transparent"/>
@@ -14,24 +14,24 @@
     <SolidColorBrush x:Key="ContainerBorder"                     Color="#f5bb2961"/>
     <SolidColorBrush x:Key="ControlDefaultForeground"            Color="#FFEBEBEB" />
 
-    <SolidColorBrush x:Key="ControlDarkerBackground"             Color="#FFc32b61" />
-    <SolidColorBrush x:Key="ControlDarkerBorderBrush"            Color="#FFc32b61" />
-    <SolidColorBrush x:Key="ControlDefaultBackground"            Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlDefaultBorderBrush"           Color="#FFea6192" />
-    <SolidColorBrush x:Key="ControlBrightDefaultBackground"      Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlBrightDefaultBorderBrush"     Color="#FFffaac9" />
+    <SolidColorBrush x:Key="ControlDarkerBackground"             Color="#FF4040ff" />
+    <SolidColorBrush x:Key="ControlDarkerBorderBrush"            Color="#FF4040ff" />
+    <SolidColorBrush x:Key="ControlDefaultBackground"            Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlDefaultBorderBrush"           Color="#FF8888ff" />
+    <SolidColorBrush x:Key="ControlBrightDefaultBackground"      Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlBrightDefaultBorderBrush"     Color="#FF9d9dff" />
     <SolidColorBrush x:Key="ControlDisabledBackground"           Color="#FFb85a7d" />
     <SolidColorBrush x:Key="ControlDisabledBorderBrush"          Color="#FFb85a7d" />
-    <SolidColorBrush x:Key="ControlMouseOverBackground"          Color="#FFffaac9" />
-    <SolidColorBrush x:Key="ControlMouseOverBorderBrush"         Color="#FFea6192"/>
-    <SolidColorBrush x:Key="ControlSelectedBackground"           Color="#FFc32b61"/>
-    <SolidColorBrush x:Key="ControlSelectedBorderBrush"          Color="#FFc32b61"/>
-    <SolidColorBrush x:Key="ControlSelectedMouseOverBackground"  Color="#FFea6192"/>
-    <SolidColorBrush x:Key="ControlSelectedMouseOverBorderBrush" Color="#FFffaac9"/>
+    <SolidColorBrush x:Key="ControlMouseOverBackground"          Color="#FF9d9dff" />
+    <SolidColorBrush x:Key="ControlMouseOverBorderBrush"         Color="#FF8888ff"/>
+    <SolidColorBrush x:Key="ControlSelectedBackground"           Color="#FF4040ff"/>
+    <SolidColorBrush x:Key="ControlSelectedBorderBrush"          Color="#FF4040ff"/>
+    <SolidColorBrush x:Key="ControlSelectedMouseOverBackground"  Color="#FF8888ff"/>
+    <SolidColorBrush x:Key="ControlSelectedMouseOverBorderBrush" Color="#FF9d9dff"/>
     <SolidColorBrush x:Key="ControlGlythColour"                  Color="#FFEBEBEB" />
     <SolidColorBrush x:Key="ControlMouseOverGlythColour"         Color="#FFD7D7D7" />
     <SolidColorBrush x:Key="ControlSelectedGlythColour"          Color="#FFC8C8C8" />
-    <SolidColorBrush x:Key="ControlDisabledGlythColour"          Color="#FFA0A0A0" />
+    <SolidColorBrush x:Key="ControlDisabledGlythColour"          Color="#ff4040ff" />
 
 
 	<!--HUE SHIFTED-->
@@ -251,7 +251,7 @@
                                                         <VisualState x:Name="Normal"/>
                                                         <VisualState x:Name="MouseOver">
                                                             <Storyboard>
-                                                                <ColorAnimation Duration="0" To="#FF73A9D8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path"/>
+                                                                <ColorAnimation Duration="0" To="#ff8888ff" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path"/>
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Disabled">
@@ -263,7 +263,7 @@
                                                 </VisualStateManager.VisualStateGroups>
                                                 <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
                                                 <Grid>
-                                                    <Path x:Name="path" Data="M288.75,232.25 L288.75,240.625 L283,236.625 z" Fill="#FF333333" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                                    <Path x:Name="path" Data="M288.75,232.25 L288.75,240.625 L283,236.625 z" Fill="#ff4040ff" HorizontalAlignment="Left" Height="10" Margin="14,-6,0,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
                                                 </Grid>
                                             </Grid>
                                         </ControlTemplate>
@@ -274,7 +274,7 @@
                                                         <VisualState x:Name="Normal"/>
                                                         <VisualState x:Name="MouseOver">
                                                             <Storyboard>
-                                                                <ColorAnimation Duration="0" To="#FF73A9D8" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path"/>
+                                                                <ColorAnimation Duration="0" To="#ff8888ff" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="path"/>
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Disabled">
@@ -286,7 +286,7 @@
                                                 </VisualStateManager.VisualStateGroups>
                                                 <Rectangle Fill="#11E5EBF1" Opacity="1" Stretch="Fill"/>
                                                 <Grid>
-                                                    <Path x:Name="path" Data="M282.875,231.875 L282.875,240.375 L288.625,236 z" Fill="#FF333333" HorizontalAlignment="Right" Height="10" Margin="0,-6,14,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
+                                                    <Path x:Name="path" Data="M282.875,231.875 L282.875,240.375 L288.625,236 z" Fill="#ff4040ff" HorizontalAlignment="Right" Height="10" Margin="0,-6,14,0" Stretch="Fill" VerticalAlignment="Center" Width="6"/>
                                                 </Grid>
                                             </Grid>
                                         </ControlTemplate>
@@ -297,7 +297,7 @@
                                                         <VisualState x:Name="Normal"/>
                                                         <VisualState x:Name="MouseOver">
                                                             <Storyboard>
-                                                                <ColorAnimation Duration="0" To="#FF73A9D8" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="buttonContent"/>
+                                                                <ColorAnimation Duration="0" To="#ff8888ff" Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="buttonContent"/>
                                                             </Storyboard>
                                                         </VisualState>
                                                         <VisualState x:Name="Disabled">
@@ -307,7 +307,7 @@
                                                         </VisualState>
                                                     </VisualStateGroup>
                                                 </VisualStateManager.VisualStateGroups>
-                                                <ContentPresenter x:Name="buttonContent" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" TextElement.Foreground="#FF333333" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,4,1,9" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                <ContentPresenter x:Name="buttonContent" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" TextElement.Foreground="#ff4040ff" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1,4,1,9" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                             </Grid>
                                         </ControlTemplate>
                                     </Grid.Resources>
@@ -1828,8 +1828,8 @@
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16"/>
-                <Border x:Name="GlyphPanel" BorderBrush="#FF26A0DA" BorderThickness="1" Background="#3D26A0DA" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
-                    <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#FF212121" FlowDirection="LeftToRight" Height="11" Width="9"/>
+                <Border x:Name="GlyphPanel" BorderBrush="#ff8888ff" BorderThickness="1" Background="#3D26A0DA" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
+                    <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#ff4040ff" FlowDirection="LeftToRight" Height="11" Width="9"/>
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center"/>
@@ -1895,8 +1895,8 @@
                     <ColumnDefinition Width="20"/>
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}" ContentSource="Icon" HorizontalAlignment="Center" Height="16" Margin="3" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" Width="16"/>
-                <Border x:Name="GlyphPanel" BorderBrush="#FF26A0DA" BorderThickness="1" Background="#3D26A0DA" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
-                    <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#FF212121" FlowDirection="LeftToRight" Height="11" Width="9"/>
+                <Border x:Name="GlyphPanel" BorderBrush="#ff8888ff" BorderThickness="1" Background="#3D26A0DA" Height="22" Margin="-1,0,0,0" Visibility="Hidden" VerticalAlignment="Center" Width="22">
+                    <Path x:Name="Glyph" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" Fill="#ff4040ff" FlowDirection="LeftToRight" Height="11" Width="9"/>
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center"/>
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center"/>
@@ -4252,8 +4252,8 @@
                 <Setter Property="BorderBrush" TargetName="border" Value="#FFF01428"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="true">
-                <Setter Property="Background" TargetName="border" Value="#FF940A14"/>
-                <Setter Property="BorderBrush" TargetName="border" Value="#FF940A14"/>
+                <Setter Property="Background" TargetName="border" Value="#ff5b5bff"/>
+                <Setter Property="BorderBrush" TargetName="border" Value="#ff5b5bff"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter Property="Background" TargetName="border" Value="{StaticResource ControlBrightDefaultBackground}"/>
@@ -4324,15 +4324,15 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/>
-    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#FF262626"/>
-    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Stroke" Color="#FF27C7F7"/>
+    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#ff4040ff"/>
+    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#ff4040ff"/>
+    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Stroke" Color="#ff8888ff"/>
     <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Fill" Color="#FFCCEEFB"/>
     <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Stroke" Color="#FF1CC4F7"/>
     <SolidColorBrush x:Key="TreeViewItem.TreeArrow.MouseOver.Checked.Fill" Color="#FF82DFFB"/>
     <PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z"/>
     <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Fill" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Stroke" Color="#FF818181"/>
+    <SolidColorBrush x:Key="TreeViewItem.TreeArrow.Static.Stroke" Color="#ff4040ff"/>
     <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Width" Value="16"/>

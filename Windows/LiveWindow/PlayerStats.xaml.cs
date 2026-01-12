@@ -17,6 +17,7 @@ namespace Spark
     {
         private const string LeaderboardApiBase = "https://g.echovrce.com/leaderboard/records?guild_id=779349159852769310&game_mode=echo_arena&stat_name=ArenaWins&reset_schedule=alltime";
         private const string PlayerStatsApiBase = "https://g.echovrce.com/player/statistics?guild_id=779349159852769310&discord_id=";
+        private const string DisplayNameLookupApiBase = "https://g.echovrce.com/account/lookup?display_name=";
         
         private ObservableCollection<LeaderboardEntry> _leaderboardData = new ObservableCollection<LeaderboardEntry>();
         private ObservableCollection<LeaderboardEntry> _filteredLeaderboardData = new ObservableCollection<LeaderboardEntry>();
@@ -50,6 +51,24 @@ namespace Spark
             public string StatValue { get; set; }
         }
         
+        public class DisplayNameLookupResult
+        {
+            [JsonProperty("id")]
+            public string Id { get; set; }
+            
+            [JsonProperty("discord_id")]
+            public string DiscordId { get; set; }
+            
+            [JsonProperty("username")]
+            public string Username { get; set; }
+            
+            [JsonProperty("display_name")]
+            public string DisplayName { get; set; }
+            
+            [JsonProperty("avatar_url")]
+            public string AvatarUrl { get; set; }
+        }
+        
         private async Task LoadInitialLeaderboard()
         {
             try
@@ -61,7 +80,6 @@ namespace Spark
                 _filteredLeaderboardData.Clear();
                 _nextCursor = "";
                 
-                // Load first 100 entries
                 string url = $"{LeaderboardApiBase}&limit=100&from_rank=1";
                 await LoadLeaderboardPage(url);
                 
@@ -100,7 +118,6 @@ namespace Spark
                             OwnerId = record["owner_id"]?.Value<string>() ?? string.Empty
                         };
                         
-                        // Check for duplicates before adding
                         if (!_leaderboardData.Any(e => e.Rank == entry.Rank && e.Name == entry.Name))
                         {
                             _leaderboardData.Add(entry);
@@ -108,7 +125,6 @@ namespace Spark
                         }
                     }
                     
-                    // Update cursor for next page
                     _nextCursor = leaderboard["next_cursor"]?.Value<string>() ?? "";
                 }
                 
@@ -128,7 +144,6 @@ namespace Spark
         
         private void AttachScrollViewer()
         {
-            // Find the ScrollViewer in the ItemsControl
             if (VisualTreeHelper.GetChildrenCount(LeaderboardList) > 0)
             {
                 var border = VisualTreeHelper.GetChild(LeaderboardList, 0) as Border;
@@ -148,10 +163,8 @@ namespace Spark
             if (_leaderboardScrollViewer == null || _isLoading || string.IsNullOrEmpty(_nextCursor))
                 return;
             
-            // Check if user has scrolled to the bottom
             if (_leaderboardScrollViewer.VerticalOffset >= _leaderboardScrollViewer.ScrollableHeight - 50)
             {
-                // Load next page
                 string url = $"{LeaderboardApiBase}&limit=100&cursor={Uri.EscapeDataString(_nextCursor)}";
                 await LoadLeaderboardPage(url);
             }
@@ -163,7 +176,6 @@ namespace Spark
             
             if (string.IsNullOrWhiteSpace(searchText))
             {
-                // Show all loaded data
                 _filteredLeaderboardData.Clear();
                 foreach (var entry in _leaderboardData)
                 {
@@ -173,7 +185,6 @@ namespace Spark
             }
             else
             {
-                // Search API for specific player
                 _ = SearchLeaderboardPlayer(searchText);
             }
         }
@@ -186,10 +197,8 @@ namespace Spark
                 LeaderboardStatusText.Text = $"Searching for '{playerName}'...";
                 LeaderboardStatusText.Foreground = Brushes.Yellow;
                 
-                // Clear current filtered results
                 _filteredLeaderboardData.Clear();
                 
-                // Search from rank 1
                 string searchUrl = $"{LeaderboardApiBase}&limit=100&from_rank=1";
                 bool found = false;
                 string cursor = "";
@@ -223,7 +232,6 @@ namespace Spark
                         
                         cursor = leaderboard["next_cursor"]?.Value<string>() ?? "";
                         
-                        // If we found results and want to stop after first match
                         if (found && _filteredLeaderboardData.Count >= 20)
                             break;
                     }
@@ -232,7 +240,6 @@ namespace Spark
                         break;
                     }
                     
-                    // Small delay to avoid rate limiting
                     await Task.Delay(50);
                 }
                 
@@ -246,7 +253,6 @@ namespace Spark
                     LeaderboardStatusText.Text = $"No players found matching '{playerName}'";
                     LeaderboardStatusText.Foreground = Brushes.Orange;
                     
-                    // Show all loaded data if no search results
                     foreach (var entry in _leaderboardData)
                     {
                         _filteredLeaderboardData.Add(entry);
@@ -258,7 +264,6 @@ namespace Spark
                 LeaderboardStatusText.Text = $"Search error: {ex.Message}";
                 LeaderboardStatusText.Foreground = Brushes.Red;
                 
-                // Fallback to local search on error
                 _filteredLeaderboardData.Clear();
                 foreach (var entry in _leaderboardData.Where(e => 
                     e.Name.IndexOf(playerName, StringComparison.OrdinalIgnoreCase) >= 0))
@@ -274,24 +279,100 @@ namespace Spark
         
         private async void SearchPlayerButton_Click(object sender, RoutedEventArgs e)
         {
-            string discordId = DiscordIdInput.Text.Trim();
-            if (string.IsNullOrWhiteSpace(discordId) || discordId == "Enter Discord ID")
+            string input = DiscordIdInput.Text.Trim();
+            
+            if (string.IsNullOrWhiteSpace(input) || input == "Enter Discord ID or Display Name")
             {
-                PlayerStatusText.Text = "Please enter a valid Discord ID";
+                PlayerStatusText.Text = "Please enter a valid Discord ID or Display Name";
                 PlayerStatusText.Foreground = Brushes.Red;
                 return;
             }
             
-            await SearchPlayerStats(discordId);
+            await SearchPlayerByInput(input);
         }
         
-        private async Task SearchPlayerStats(string discordId)
+        private async Task SearchPlayerByInput(string input)
         {
             try
             {
                 PlayerStatusText.Text = "Searching...";
                 PlayerStatusText.Foreground = Brushes.Yellow;
                 SearchPlayerButton.IsEnabled = false;
+                
+                string discordId = input;
+                
+                if (!long.TryParse(input, out _) || input.Length < 17 || input.Length > 20)
+                {
+                    PlayerStatusText.Text = "Looking up display name...";
+                    PlayerStatusText.Foreground = Brushes.Yellow;
+                    
+                    var lookupResult = await LookupDisplayName(input);
+                    
+                    if (lookupResult != null && !string.IsNullOrEmpty(lookupResult.DiscordId))
+                    {
+                        discordId = lookupResult.DiscordId;
+                        PlayerStatusText.Text = $"Found user: {lookupResult.DisplayName}";
+                        PlayerStatusText.Foreground = Brushes.LightBlue;
+                        
+                    }
+                    else
+                    {
+                        PlayerStatusText.Text = "Display name not found. Trying as Discord ID...";
+                        PlayerStatusText.Foreground = Brushes.Yellow;
+                    }
+                }
+                
+                // Now search with the Discord ID
+                await SearchPlayerStats(discordId);
+            }
+            catch (Exception ex)
+            {
+                PlayerStatsGrid.Visibility = Visibility.Hidden;
+                PlayerStatusText.Text = $"Error: {ex.Message}";
+                PlayerStatusText.Foreground = Brushes.Red;
+            }
+            finally
+            {
+                SearchPlayerButton.IsEnabled = true;
+            }
+        }
+        
+        private async Task<DisplayNameLookupResult> LookupDisplayName(string displayName)
+        {
+            try
+            {
+                string url = $"{DisplayNameLookupApiBase}{Uri.EscapeDataString(displayName)}";
+                string json = await _httpClient.GetStringAsync(url);
+                
+                var result = JsonConvert.DeserializeObject<DisplayNameLookupResult>(json);
+                
+                if (result != null && !string.IsNullOrEmpty(result.DiscordId))
+                {
+                    return result;
+                }
+                return null;
+            }
+            catch (HttpRequestException httpEx) when (httpEx.Message.Contains("404") || 
+                                                    httpEx.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+            catch (JsonException)
+            {
+                return null;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+        
+        private async Task SearchPlayerStats(string discordId)
+        {
+            try
+            {
+                PlayerStatusText.Text = "Fetching player statistics...";
+                PlayerStatusText.Foreground = Brushes.Yellow;
                 
                 string apiUrl = $"{PlayerStatsApiBase}{discordId}";
                 string json = await _httpClient.GetStringAsync(apiUrl);
@@ -363,15 +444,20 @@ namespace Spark
                 PlayerStatusText.Text = "Player data loaded";
                 PlayerStatusText.Foreground = Brushes.LightGreen;
             }
+            catch (HttpRequestException httpEx) when (httpEx.Message.Contains("404") || 
+                                                    httpEx.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                PlayerStatsGrid.Visibility = Visibility.Hidden;
+                PlayerStatusText.Text = "Player not found. Check the Discord ID or Display Name.";
+                PlayerStatusText.Foreground = Brushes.Orange;
+                throw;
+            }
             catch (Exception ex)
             {
                 PlayerStatsGrid.Visibility = Visibility.Hidden;
                 PlayerStatusText.Text = $"Error: {ex.Message}";
                 PlayerStatusText.Foreground = Brushes.Red;
-            }
-            finally
-            {
-                SearchPlayerButton.IsEnabled = true;
+                throw;
             }
         }
         
@@ -387,7 +473,7 @@ namespace Spark
         
         private void DiscordIdInput_GotFocus(object sender, RoutedEventArgs e)
         {
-            if (DiscordIdInput.Text == "Enter Discord ID")
+            if (DiscordIdInput.Text == "Enter Discord ID or Display Name")
             {
                 DiscordIdInput.Text = "";
                 DiscordIdInput.Foreground = Brushes.White;
@@ -398,7 +484,7 @@ namespace Spark
         {
             if (string.IsNullOrWhiteSpace(DiscordIdInput.Text))
             {
-                DiscordIdInput.Text = "Enter Discord ID";
+                DiscordIdInput.Text = "Enter Discord ID or Display Name";
                 DiscordIdInput.Foreground = Brushes.Gray;
             }
         }
