@@ -77,7 +77,7 @@ namespace Spark
                     _latestVersion = release["tag_name"]?.ToString().TrimStart('v') ?? "Unknown";
 
                     LatestVersionText.Text = _latestVersion;
-                    StatusText.Text = $"Found version: {_latestVersion}";
+                    StatusText.Text = $"Latest version: {_latestVersion}";
 
                     string releaseNotes = release["body"]?.ToString();
                     UpdateDetailsText.Text += $"[{DateTime.Now}] Latest version found: {_latestVersion}\n";
@@ -94,7 +94,12 @@ namespace Spark
             {
                 StatusText.Text = $"Error checking updates: {ex.Message}";
                 UpdateDetailsText.Text += $"[{DateTime.Now}] Error: {ex.Message}\n";
-                ResetButtons();
+                ColorVersionDropdown.IsEnabled = false;
+                DownloadUpdateButton.IsEnabled = false;
+            }
+            finally
+            {
+                CheckUpdateButton.IsEnabled = true;
             }
         }
 
@@ -113,11 +118,11 @@ namespace Spark
                         string name = asset["name"]?.ToString();
                         string downloadUrl = asset["browser_download_url"]?.ToString();
 
-                        // BLACKLIST SparkTTSCache.zip - Do not include it as a theme option
+                        // Look for Spark theme files but exclude SparkTTSCache.zip
                         if (name != null && downloadUrl != null && 
                             name.StartsWith("Spark", StringComparison.OrdinalIgnoreCase) && 
                             name.EndsWith(".zip", StringComparison.OrdinalIgnoreCase) &&
-                            !name.Equals("SparkTTSCache.zip", StringComparison.OrdinalIgnoreCase)) // Blacklist TTS cache
+                            !name.Equals("SparkTTSCache.zip", StringComparison.OrdinalIgnoreCase))
                         {
                             string displayName = GetDisplayName(name);
                             _availableVersions.Add(new ColorVersion
@@ -158,9 +163,6 @@ namespace Spark
                         {
                             UpdateDetailsText.Text += $"[{DateTime.Now}]   • {version.DisplayName} ({version.FileName})\n";
                         }
-                        
-                        // Log blacklisted files
-                        UpdateDetailsText.Text += $"[{DateTime.Now}] Blacklisted: SparkTTSCache.zip (TTS Cache, not a theme)\n";
                     });
                 }
                 else
@@ -225,8 +227,8 @@ namespace Spark
 
             try
             {
-                CheckUpdateButton.IsEnabled = false;
                 DownloadUpdateButton.IsEnabled = false;
+                CheckUpdateButton.IsEnabled = false;
                 ColorVersionDropdown.IsEnabled = false;
                 UpdateProgressBar.Visibility = Visibility.Visible;
                 UpdateProgressBar.Value = 0;
@@ -303,22 +305,24 @@ namespace Spark
 
                 string batchContent = $@"
 @echo off
-chcp 65001 >nul
 echo ========================================
 echo         SPARK UPDATE - {Path.GetFileNameWithoutExtension(originalFileName)}
 echo ========================================
 echo.
-echo Updating Spark with {Path.GetFileNameWithoutExtension(originalFileName)} theme...
+echo Current Spark folder: {targetFolder}
+echo Source update files: {actualSourceFolder}
 echo.
-echo Step 1: Stopping Spark...
+echo Step 1: Killing Spark...
 taskkill /f /im Spark.exe >nul 2>&1
 timeout /t 2 /nobreak >nul
 
-echo Step 2: Copying new files...
+echo Step 2: Copying ALL files...
 echo FROM: {actualSourceFolder}
 echo TO: {targetFolder}
 echo.
-xcopy ""{actualSourceFolder}\*"" ""{targetFolder}"" /E /Y /I /H /R
+
+REM Copy EVERYTHING from source to target
+xcopy ""{actualSourceFolder}"" ""{targetFolder}"" /E /Y /I /H
 
 echo Step 3: Cleaning up...
 if exist ""{extractPath}"" rmdir /s /q ""{extractPath}""
@@ -328,7 +332,7 @@ echo Step 4: Starting Spark...
 cd /d ""{targetFolder}""
 start """" Spark.exe
 
-echo Step 5: Deleting update script...
+echo Step 5: Deleting this script...
 timeout /t 1 /nobreak >nul
 del ""{batchFile}"" >nul 2>&1
 
@@ -342,7 +346,7 @@ exit
 
                 Dispatcher.Invoke(() =>
                 {
-                    UpdateDetailsText.Text += $"[{DateTime.Now}] Update script created\n";
+                    UpdateDetailsText.Text += $"[{DateTime.Now}] Batch file created\n";
                     StatusText.Text = "Starting update...";
                 });
 
@@ -375,6 +379,7 @@ exit
                 {
                     StatusText.Text = $"Installation failed: {ex.Message}";
                     UpdateDetailsText.Text += $"[{DateTime.Now}] Installation failed: {ex.Message}\n";
+                    UpdateDetailsText.Text += $"[{DateTime.Now}] Stack: {ex.StackTrace}\n";
                     ResetButtons();
                 });
             }
@@ -457,8 +462,7 @@ exit
                     {
                         TTSCacheStatus.Text = "TTS Cache downloaded successfully!";
                         UpdateDetailsText.Text += $"[{DateTime.Now}] TTS Cache downloaded to: {ttsCacheFolder}\n";
-                        System.Windows.MessageBox.Show($"TTS Cache downloaded and extracted to:\n{ttsCacheFolder}", 
-                            "Success", MessageBoxButton.OK);
+                        new MessageBox($"Success: TTS Cache downloaded and extracted to:\n{ttsCacheFolder}").Show();
                     });
                 }
             }
@@ -468,13 +472,88 @@ exit
                 {
                     TTSCacheStatus.Text = $"Error: {ex.Message}";
                     UpdateDetailsText.Text += $"[{DateTime.Now}] TTS Cache error: {ex.Message}\n";
-                    System.Windows.MessageBox.Show($"Error downloading TTS Cache: {ex.Message}", 
-                        "Error", MessageBoxButton.OK);
+                    new MessageBox($"Error downloading TTS Cache: {ex.Message}").Show();
                 });
             }
             finally
             {
                 DownloadTTSCacheButton.IsEnabled = true;
+            }
+        }
+
+        private async void DownloadHapticsFixButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (SparkSettings.instance == null || string.IsNullOrEmpty(SparkSettings.instance.echoVRPath))
+                {
+                    new MessageBox("Error: EchoVR Path is not set in Spark Settings. Please set it in the main settings first.").Show();
+                    return;
+                }
+
+                string echoDir = Path.GetDirectoryName(SparkSettings.instance.echoVRPath);
+                if (!Directory.Exists(echoDir))
+                {
+                    new MessageBox($"Error: EchoVR directory not found at:\n{echoDir}").Show();
+                    return;
+                }
+
+                DownloadHapticsFixButton.IsEnabled = false;
+                HapticsFixStatus.Text = "Downloading Haptics Fix...";
+                UpdateDetailsText.Text += $"[{DateTime.Now}] Starting Haptics Fix download...\n";
+
+                string url = "https://github.com/heisthecat31/EchoVR-Haptics/releases/download/haptics/HapticsFix.zip";
+                string zipPath = Path.Combine(_tempFolder, "HapticsFix.zip");
+                string extractPath = Path.Combine(_tempFolder, "HapticsFix_Extracted");
+
+                using (WebClient client = new WebClient())
+                {
+                    client.Headers.Add("User-Agent", "Spark-Updater");
+                    await client.DownloadFileTaskAsync(new Uri(url), zipPath);
+                }
+
+                UpdateDetailsText.Text += $"[{DateTime.Now}] Download complete. Extracting...\n";
+
+                if (Directory.Exists(extractPath))
+                    Directory.Delete(extractPath, true);
+                
+                ZipFile.ExtractToDirectory(zipPath, extractPath);
+
+                // Copy files
+                string[] filesToCopy = { "dbgcore.dll", "haptics_config.txt" };
+                foreach (string fileName in filesToCopy)
+                {
+                    string sourceFile = Path.Combine(extractPath, fileName);
+                    string destFile = Path.Combine(echoDir, fileName);
+
+                    if (File.Exists(sourceFile))
+                    {
+                        UpdateDetailsText.Text += $"[{DateTime.Now}] Copying {fileName} to {destFile}\n";
+                        File.Copy(sourceFile, destFile, true);
+                    }
+                    else
+                    {
+                        UpdateDetailsText.Text += $"[{DateTime.Now}] Warning: {fileName} not found in zip.\n";
+                    }
+                }
+
+                // Cleanup
+                if (File.Exists(zipPath)) File.Delete(zipPath);
+                if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
+
+                HapticsFixStatus.Text = "Haptics Fix installed successfully!";
+                UpdateDetailsText.Text += $"[{DateTime.Now}] Haptics Fix installed successfully.\n";
+                new MessageBox("Success: EchoVR Haptics Fix installed successfully!").Show();
+            }
+            catch (Exception ex)
+            {
+                HapticsFixStatus.Text = "Error installing fix.";
+                UpdateDetailsText.Text += $"[{DateTime.Now}] Error installing Haptics Fix: {ex.Message}\n";
+                new MessageBox($"Error installing Haptics Fix: {ex.Message}").Show();
+            }
+            finally
+            {
+                DownloadHapticsFixButton.IsEnabled = true;
             }
         }
 
@@ -488,11 +567,10 @@ exit
 
         private void ResetButtons()
         {
-            CheckUpdateButton.IsEnabled = true;
             DownloadUpdateButton.IsEnabled = true;
+            CheckUpdateButton.IsEnabled = true;
             ColorVersionDropdown.IsEnabled = true;
             UpdateProgressBar.Visibility = Visibility.Collapsed;
-            UpdateProgressBar.Value = 0;
         }
     }
 }
