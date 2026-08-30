@@ -983,7 +983,7 @@ namespace Spark
 				int delay = Math.Clamp((int)(StatsIntervalMs - fetchSw.ElapsedMilliseconds - 3), 0, 1000);
 				if (delay > 0)
 				{
-					Thread.Sleep(delay);
+					await Task.Delay(delay);
 				}
 			}
 		}
